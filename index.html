@@ -3,7 +3,8 @@
 <html lang="uk"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KSENIA ROTKO — CASE PORTFOLIO</title>
+<title>KSENIA ROTKO — CASE PORTFOLIO | Додаток до резюме</title>
+<meta name="description" content="Ksenia Rotko — професійні кейси та портфоліо як додаток до резюме.">
 <style>
 :root{--bg:#f5f3f1;--panel:#ebe8e5;--header:#c9c5c1;--sidebar:#625e5b;--ink:#34312f;--muted:#706a66;--line:#b8b2ad;--accent:#8a6d5d;--white:#fff;--max:1180px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}
@@ -116,6 +117,13 @@ body.editing .collage-photo input,body.editing .about-photo input{display:block;
   .hero-profile{max-width:100%}
 }
 
+
+/* PUBLIC PRESENTATION MODE */
+.toolbar{display:none!important}
+.hint{display:none!important}
+.photo input,.collage-photo input,.about-photo input{display:none!important}
+[contenteditable="true"]{outline:none!important;cursor:default}
+
 </style>
 
 <style>
@@ -152,7 +160,7 @@ body.editing .collage-photo input,body.editing .about-photo input{display:block;
 </head>
 <body class="">
 <div class="topbar"><div class="topbar-inner"><div class="brand">KSENIA ROTKO / CASE PORTFOLIO</div>
-<div class="nav"><a href="file:///C:/Users/XXX/Downloads/index%20(3).html#about">ABOUT</a><a href="file:///C:/Users/XXX/Downloads/index%20(3).html#cases">CASES</a><a href="file:///C:/Users/XXX/Downloads/index%20(3).html#skills">SKILLS</a><a href="file:///C:/Users/XXX/Downloads/index%20(3).html#contact">CONTACT</a></div>
+<div class="nav"><a href="#about">ABOUT</a><a href="#cases">CASES</a><a href="#skills">SKILLS</a><a href="#contact">CONTACT</a></div>
 <div class="toolbar"><button id="editBtn" class="primary">РЕДАГУВАТИ</button><button onclick="window.print()">PDF / ДРУК</button><button class="edit-only" id="saveBtn">ЗБЕРЕГТИ</button><button class="edit-only" id="resetBtn">СКИНУТИ</button></div></div></div>
 <div class="hint">Редагування працює прямо у браузері. Фото можна підвантажувати локально в кожен кейс.</div>
 
@@ -263,7 +271,7 @@ body.editing .collage-photo input,body.editing .about-photo input{display:block;
 <div class="footer" id="contact"><div contenteditable="false">CASE PORTFOLIO · 2026</div><div contenteditable="false">COMMUNICATIONS · PROJECT MANAGEMENT · DIGITAL</div></div>
 
 <script>
-const STORAGE='ksenia_case_portfolio_v7';
+const STORAGE='ksenia_public_portfolio';
 const editable=[...document.querySelectorAll('[contenteditable="true"]')];
 let editing=false;
 function setEditing(on){editing=on;document.body.classList.toggle('editing',on);document.getElementById('editBtn').textContent=on?'ПЕРЕГЛЯД':'РЕДАГУВАТИ';editable.forEach(el=>el.setAttribute('contenteditable',on?'true':'false'));}
@@ -274,4 +282,13 @@ try{const saved=JSON.parse(localStorage.getItem(STORAGE)||'null');if(saved&&save
 document.querySelectorAll('.photo input[type=file], .collage-photo input[type=file], .about-photo input[type=file]').forEach(input=>{input.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const box=input.parentElement;const img=box.querySelector('img');const ph=box.querySelector('.placeholder');img.src=r.result;img.style.display='block';if(ph)ph.style.display='none';};r.readAsDataURL(f);});});
 </script>
 
+
+<script>
+// Public share version: presentation only.
+document.addEventListener('DOMContentLoaded',()=>{
+  document.body.classList.remove('editing');
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.setAttribute('contenteditable','false'));
+  document.querySelectorAll('input[type=file]').forEach(el=>el.remove());
+});
+</script>
 </body></html>
